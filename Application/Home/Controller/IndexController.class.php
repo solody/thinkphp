@@ -73,4 +73,20 @@ class IndexController extends Controller
         echo PHP_EOL;
         echo $rs;
     }
+
+    public function addFamily()
+    {
+        $family = array(
+            'name'=>'快乐家庭',
+            'girls'=>array(
+                array('name'=>'小红'),
+                array('name'=>'小爱'),
+                array('name'=>'小青')
+            )
+        );
+
+        $rs = D('Family')->relation(true)->add($family);
+
+        echo $rs;
+    }
 }
