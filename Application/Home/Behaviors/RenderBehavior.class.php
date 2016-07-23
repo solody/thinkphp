@@ -7,7 +7,7 @@ class RenderBehavior extends Behavior{
     //行为执行入口
     public function run(&$param)
     {
-        header('Content-Type: application/json'); 
-        print_r($param);
+        header('Content-Type: application/json; charset=utf-8');
+        //header("Content-type: text/html; charset=utf-8");
     }
 }

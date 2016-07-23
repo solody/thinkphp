@@ -8,7 +8,7 @@ class IndexController extends Controller
     public function index()
     {
         $group = D('Group')->relation(true)->select();
-        echo json_encode($group);
+        print_r($group);
     }
     
     public function addUser()
@@ -23,6 +23,6 @@ class IndexController extends Controller
         );
         
         $rs = D('User')->relation(true)->add($user_data);
-        echo json_encode($rs);
+        print_r($rs);
     }
 }
