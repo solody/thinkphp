@@ -10,6 +10,42 @@ class IndexController extends Controller
         $group = D('Group')->relation(true)->select();
         print_r($group);
     }
+
+    public function addGroup()
+    {
+        $group_data =array(
+            'name'=>'电影爱好者',
+            'users'=>array(
+                array(
+                    'username'=>$this->getUsername(),
+                    'password'=>'group_add_password',
+                    'person'=>array(
+                        'nickname'=>$this->getNickname(),
+                        'avatar'=>'^@^'
+                    )
+                ),
+                array(
+                    'username'=>$this->getUsername(),
+                    'password'=>'group_add_password',
+                    'person'=>array(
+                        'nickname'=>$this->getNickname(),
+                        'avatar'=>'^@^'
+                    )
+                ),
+                array(
+                    'username'=>$this->getUsername(),
+                    'password'=>'group_add_password',
+                    'person'=>array(
+                        'nickname'=>$this->getNickname(),
+                        'avatar'=>'^@^'
+                    )
+                )
+            )
+        );
+
+        $rs = D('Group')->relation(true)->add($group_data);
+        echo $rs;
+    }
     
     public function addUser()
     {
@@ -28,41 +64,11 @@ class IndexController extends Controller
 
     public function editUser()
     {
-        $t = function ($unistr, $encoding = 'GBK', $prefix = '&#', $postfix = ';') {
-            $arruni = explode($prefix, $unistr);
-            $unistr = '';
-            for($i = 1, $len = count($arruni); $i < $len; $i++) {
-                if (strlen($postfix) > 0) {
-                    $arruni[$i] = substr($arruni[$i], 0, strlen($arruni[$i]) - strlen($postfix));
-                }
-                $temp = intval($arruni[$i]);
-                $unistr .= ($temp < 256) ? chr(0) . chr($temp) : chr($temp / 256) . chr($temp % 256);
-            }
-            return iconv('UCS-2', $encoding, $unistr);
-        };
-
-
-        $getUsername = function (){
-            $string = '';
-            for ($i=1; $i<8; $i++) {
-                $string .= chr(rand(65,90));
-            }
-            return $string;
-        };
-
-        $getNickname = function () use ($t) {
-            $string = '';
-            for ($i=1; $i<8; $i++) {
-                $string .= $t('&#'.rand(19968,40869).';','utf-8');
-            }
-            return $string;
-        };
-
         $user_data = array(
-            'username'=>$getUsername(),
+            'username'=>$this->getUsername(),
             'password'=>'123456',
             'person'=>array(
-                'nickname'=>$getNickname(),
+                'nickname'=>$this->getNickname(),
                 'avatar'=>'^o^'
             )
         );
@@ -114,5 +120,34 @@ class IndexController extends Controller
         $rs = D('Family')->relation('girls')->delete(2);
 
         echo $rs;
+    }
+
+    private function t($unistr, $encoding = 'GBK', $prefix = '&#', $postfix = ';') {
+        $arruni = explode($prefix, $unistr);
+        $unistr = '';
+        for($i = 1, $len = count($arruni); $i < $len; $i++) {
+            if (strlen($postfix) > 0) {
+                $arruni[$i] = substr($arruni[$i], 0, strlen($arruni[$i]) - strlen($postfix));
+            }
+            $temp = intval($arruni[$i]);
+            $unistr .= ($temp < 256) ? chr(0) . chr($temp) : chr($temp / 256) . chr($temp % 256);
+        }
+        return iconv('UCS-2', $encoding, $unistr);
+    }
+
+    private function getUsername(){
+        $string = '';
+        for ($i=1; $i<8; $i++) {
+            $string .= chr(rand(65,90));
+        }
+        return $string;
+    }
+
+    private function getNickname(){
+        $string = '';
+        for ($i=1; $i<8; $i++) {
+            $string .= $this->t('&#'.rand(19968,40869).';','utf-8');
+        }
+        return $string;
     }
 }
