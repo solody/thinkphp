@@ -89,4 +89,23 @@ class IndexController extends Controller
 
         echo $rs;
     }
+
+    public function editFamily()
+    {
+        $family = array(
+            'name'=>'快乐家庭改',
+            'girls'=>array(
+                array('name'=>'旧成员改名', 'id'=>1),
+                array('name'=>'小红+'),
+                array('name'=>'小爱+'),
+                array('name'=>'小青+')
+            )
+        );
+
+        $rs = D('Family')->relation(true)->where(array(
+            'id'=>1
+        ))->save($family);
+
+        echo $rs;
+    }
 }
