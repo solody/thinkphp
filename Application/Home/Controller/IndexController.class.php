@@ -108,4 +108,11 @@ class IndexController extends Controller
 
         echo $rs;
     }
+
+    public function deleteFamily()
+    {
+        $rs = D('Family')->relation('girls')->delete(2);
+
+        echo $rs;
+    }
 }
