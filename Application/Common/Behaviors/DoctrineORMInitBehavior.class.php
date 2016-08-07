@@ -1,5 +1,5 @@
 <?php
-namespace Home\Behaviors;
+namespace Common\Behaviors;
 
 use Think\Behavior;
 use Doctrine\ORM\Tools\Setup;
@@ -16,13 +16,12 @@ class DoctrineORMInitBehavior extends Behavior
         $dbParams = array(
             'driver'   => 'pdo_mysql',
             'user'     => C('DB_USER'),
-            'password' => C('DB_PSD'),
+            'password' => C('DB_PWD'),
             'dbname'   => C('DB_NAME'),
         );
 
         $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
         global $DoctrineEM;
         $DoctrineEM = EntityManager::create($dbParams, $config);
-        error_log($DoctrineEM->find('haha'));
     }
 }

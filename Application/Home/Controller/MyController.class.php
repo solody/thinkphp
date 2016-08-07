@@ -3,20 +3,12 @@ namespace Home\Controller;
 
 use Think\Controller;
 
-class IndexController extends Controller
+class MyController extends Controller
 {
     public function index()
     {
-        global $DoctrineEM;
-
-        $users = $DoctrineEM->getRepository('Entity\User')->findAll();
-
-        print(json_encode($users, JSON_PARTIAL_OUTPUT_ON_ERROR ));
-
-        echo json_last_error();
-
         $group = D('Group')->relation(true)->select();
-        //print_r($group);
+        print_r($group);
     }
 
     public function addGroup()

@@ -1,5 +1,5 @@
 <?php
-namespace Home\Behaviors;
+namespace Common\Behaviors;
 
 use Think\Behavior;
 
@@ -8,6 +8,5 @@ class RenderBehavior extends Behavior{
     public function run(&$param)
     {
         header('Content-Type: application/json; charset=utf-8');
-        //header("Content-type: text/html; charset=utf-8");
     }
 }

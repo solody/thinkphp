@@ -9,5 +9,8 @@
             "name": "solody",
             "email": "12943125@qq.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-0": {"": "src/"}
+    }
 }
